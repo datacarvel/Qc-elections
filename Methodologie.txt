@@ -115,3 +115,14 @@ ComtesProgPerdus_CAQouPLQ <- PartisDroite_Win106 %>%
 ## Tableau complet des circonscriptions concernées:
 
 Resultats15comtesProg <- ResultatsEtPosition %>% filter(.id %in% ComtesProgPerdus_V) %>% group_by(.id)
+
+## Pour savoir dans quels comtés caquistes ou libéraux le PQ ou QS a fini 2e
+
+PartisProg2e <- ResultatsEtPosition %>%
+  filter(!.id %in% PartisProg_Win19_V) %>%
+  filter(numeroPartiPolitique %in% PartisProg) %>%
+  filter(Position %in% "2") %>%
+  group_by(.id)
+
+sum(PartisProg2e$abreviationPartiPolitique == "Q.S.")
+sum(PartisProg2e$abreviationPartiPolitique == "P.Q.")
